@@ -1,0 +1,22 @@
+{
+    "name": "Hawk Eye",
+    "short_name": "hawkeye",
+    "start_url": ".",
+    "background_color": "#352D2D",
+    "theme_color": "#D83FA8",
+    "display": "standalone",
+    "orientation": "portrait",
+    "icons" : [
+        {
+            "src": "/images/logos/logo192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/logos/logo-transparent.png",
+            "sizes": "1000x1000",
+            "type": "image/png"
+        }
+
+    ]
+}
