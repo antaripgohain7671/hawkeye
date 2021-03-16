@@ -1,10 +1,10 @@
-// checkpoint
-
 const CACHE_NAME = "hawkeye-version-1";
 
 const assets = [
     "./",
-    "./index.html"
+    "./index.html",
+    "./images/logos/logo192.png",
+    "./images/logos/offline.html"
 ];
 
 const self = this;
