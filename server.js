@@ -4,6 +4,9 @@ const app = express();
 const port = process.env.PORT || 5000;      // Port either 5000 or environment variable from heroku
 
 
+const espRoutes = require('./routes/esp.classify.js');
+app.use('/esp', espRoutes);
+
 // Serve static assets / react build folder if we are in production, works when deployed to heroku
 // In local server, need to start the react app manually
 if(process.env.NODE_ENV === 'production') {

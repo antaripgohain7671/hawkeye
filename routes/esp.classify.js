@@ -3,6 +3,9 @@ const Busboy = require('busboy');
 const path = require('path');
 const fs = require('fs');
 
+const ml = require('../ml/classifier'); // Our custom module
+let img = 'ml/images/file.jpg';
+
 const router = express.Router();
 
 router.post('/classify', (req, res) => {
@@ -20,6 +23,11 @@ router.post('/classify', (req, res) => {
             'Connection': 'close'
         });
         res.end("Image recieved");
+
+        // Classify image
+        ml.classify('mobilenet/model.json', img, (result) => {
+            console.log("Finished classifying");
+        });
     });
 
     return req.pipe(busboy);
