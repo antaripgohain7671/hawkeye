@@ -7,7 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#FFFFFF" />
   <meta name="description" content="Web app created using ReactJS" />
+  <!-- Load the 192x192 logo used in PWA -->
   <link rel="apple-touch-icon" href="./images/logos/logo192.png" />
+  <!-- Load the manifest required for PWA -->
   <link rel="manifest" href= "./manifest.json" />
 
   <title>Hawk Eye</title>
@@ -15,10 +17,12 @@
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
+  <!-- ReactJS renders the entire app inside this root div -->
   <div id="root"></div>
 
   <!-- Register Service Worker -->
   <script>
+    // Check if service worker is supported by browser
     if ("serviceWorker" in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register("./serviceWorker.js")

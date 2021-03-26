@@ -1,5 +1,6 @@
 const CACHE_NAME = "hawkeye-version-1";
 
+// Files that will be cached in the PWA
 const assets = [
     "./",
     "./index.html",
