@@ -1,11 +1,10 @@
 const express = require('express');         // Used for routing
 const path = require('path');
 const app = express();
-const port = process.env.PORT || 5000;      // Port either 5000 or environment variable from heroku
 const dotenv   = require('dotenv');
 const mongoose = require('mongoose');
 
-// Add /esp/ routes
+// Add "/esp" routes
 const espRoutes = require('./routes/espRoutes.js');
 app.use('/esp', espRoutes);
 
@@ -28,7 +27,7 @@ dotenv.config();
 mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
     // When connection to db successful Start node server on port
     .then(() => {
-        app.listen(port, () => {  console.log("Server started on port", port);  });
+        app.listen(process.env.PORT, () => {  console.log("Server started on port", process.env.PORT);  });
     })
     // If any err
     .catch((error) => {  console.error(error.message);  }

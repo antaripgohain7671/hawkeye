@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Event = require('../models/event');
+const busboy = require('connect-busboy');
 
-// Post images from esp to report an event
-router.post('/event', async (req, res) => {
-    // TODO: Add logic to create event
-});
+const { createEvent } = require('../controllers/espControllers.js');
+
+router.post('/event', busboy({ immediate: true }), createEvent);
 
 module.exports = router;
