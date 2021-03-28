@@ -29,14 +29,12 @@ const classify = async (model, image, callback) => {
   const mn_model = await loadModel(model)
   const predictions = await mn_model.classify(input)
 
-  let isPackage = (predictions[0].className == 'carton' || predictions[0].className == 'packet') && predictions[0].probability > 0.2;
-  if(isPackage) {
-    console.log("Probably a package has arrived");
-  } else {
-    console.log("Event occured, but probably not a package");
+  let result = {
+    detectedObj: predictions[0].className,
+    probability: predictions[0].probability
   }
   
-  callback();
+  return callback(result);
 }
 
 module.exports = { classify: classify }

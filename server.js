@@ -5,8 +5,8 @@ const dotenv   = require('dotenv');
 const mongoose = require('mongoose');
 
 // Add "/esp" routes
-const espRoutes = require('./routes/espRoutes.js');
-app.use('/esp', espRoutes);
+const eventRoutes = require('./routes/eventsRoutes.js');
+app.use('/events', eventRoutes);
 
 // Serve static assets / react build folder if we are in production, works when deployed to heroku
 // In local server, need to start the react app manually
