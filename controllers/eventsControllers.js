@@ -8,6 +8,7 @@
 // To classify incoming images (detect a package / carton)
 const { classify } = require('../ml/classifier');
 
+
 // Post images from esp to report an event
 const createEvent = (req, res) => {
     if (!req.busboy) throw new Error('file binary data cannot be null');
@@ -38,4 +39,10 @@ const createEvent = (req, res) => {
     });
 }
 
-module.exports = { createEvent }
+
+const fetchEvents = (req, res) => {
+
+}
+
+
+module.exports = { createEvent, fetchEvents }
