@@ -35,13 +35,19 @@ const createEvent = (req, res) => {
         // if (!token)     throw new Error('No security token was passed');
 
         classify('mobilenet/model.json', fileData, async (result) => {
-            try {
-                if ((result.detectedObj == "carton" || result.detectedObj == "packet") && result.probability > 0.2) {
-                        const newEvent = new Event(["no images for now, but definitely a package has arrived"]);
-                        await newEvent.save();
-                }
-            } catch (error) {
+            
+            if ((result.detectedObj == "carton" || result.detectedObj == "packet") && result.probability > 0.2) {
+                try {
+
+                    let imageToSave = fileData.toString('base64');
+                    const newEvent = new Event( {
+                        image: imageToSave
+                    });
+                    await newEvent.save();
+
+                } catch (error) {
                 console.error(error)
+                }
             }
             res.send("Done");
         });

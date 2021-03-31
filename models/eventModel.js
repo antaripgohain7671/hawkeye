@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 // Event schema
 const eventSchema = mongoose.Schema({
-    images: [String]
+    image: String
 }, {
     timestamps: true
 });
