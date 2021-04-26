@@ -34,11 +34,11 @@ void live_stream();
 void report_event();
 
 
-// Replace with your network credentials and server address before uploading to esp32-cam
-const char* hostname = "ESP32CAM";
-const char* ssid = "wifi";
-const char* password = "123456789";
-const char* server_address = "0.0.0.0"; 
+// Replace with your network credentials and server address & port before uploading to esp32-cam
+const char* hostname        = "ESP32CAM";
+const char* ssid            = "Arcadia Planitia";
+const char* password        = "nukemars69420";
+//const char* server_address  = "192.168.0.105"; 
 SocketIOclient socketIO;
 
 
@@ -62,7 +62,8 @@ void setup() {
   Serial.println(setup_camera() ? "CAMERA SETUP" : "ERROR SETTING UP CAMERA");
 
   // Make socket connection with server address, port and URL
-  socketIO.begin(server_address, 3000, "/socket.io/?EIO=4");
+//  socketIO.begin(server_address, 5000, "/socket.io/?EIO=4");
+  socketIO.begin("192.168.0.105", 5000, "/socket.io/?EIO=4");
 
   // SocketIO event handler
   socketIO.onEvent(socketIOEvent);
@@ -224,10 +225,10 @@ bool motion_detect() {
     }
   }
 
-  //    Serial.print("Changed ");
-  //    Serial.print(changes);
-  //    Serial.print(" out of ");
-  //    Serial.println(blocks);
+      Serial.print("Changed ");
+      Serial.print(changes);
+      Serial.print(" out of ");
+      Serial.println(blocks);
 
   return (1.0 * changes / blocks) > IMAGE_DIFF_THRESHOLD;
 }
@@ -357,7 +358,6 @@ void live_stream() {
 
 
 void report_event() {
-  Serial.println("report event beginning"); /////////////////////////
   camera_fb_t * fb = NULL;
 
   // Take Picture with Camera
@@ -402,5 +402,4 @@ void report_event() {
   socketIO.sendEVENT(output);
   esp_camera_fb_return(fb);
   free(_jpg_buf);
-  Serial.println("report event end"); /////////////////////////
 }
