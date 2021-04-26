@@ -12,6 +12,10 @@ const { classify } = require('./ml/classifier');
 // To create new entry in db after a new package is detected
 const { Event } = require('./models/eventModel');
 
+// Add "/events" route, used by frontend to fetch all events
+const eventRoutes = require('./routes/eventsRoutes.js');
+app.use('/events', eventRoutes);
+
 // Serve static assets / react build folder if we are in production, works when deployed to heroku
 // In local server, need to start the react app manually
 if(process.env.NODE_ENV === 'production') {
@@ -50,8 +54,15 @@ io.on('connection', (socket) => {
 
         // - Run object detection / classification on it
         classify('mobilenet/model.json', pictureBuffer, async (result) => {
+            console.log(`Classified event image as: "${result.detectedObj}" with ${result.probability * 100}% probability`);
             try {
-                console.log(result);
+                let newEvent = new Event({
+                    image: pictureBase64,
+                    detected: result.detectedObj,
+                    prediction: result.probability
+                });
+
+                await newEvent.save();
             }
             catch (error) { console.error(error) }
         });

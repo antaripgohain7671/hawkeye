@@ -8,8 +8,10 @@ const mongoose = require('mongoose');
 
 // Event schema
 const eventSchema = mongoose.Schema({
-    image: String
-}, {
+    image: String,
+    detected: String,
+    prediction: String
+  }, {
     timestamps: true
 });
 

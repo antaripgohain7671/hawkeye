@@ -275,11 +275,11 @@ void print_frame(uint16_t frame[H][W]) {
 void socketIOEvent(socketIOmessageType_t type, uint8_t * payload, size_t length) {
   switch (type) {
     case sIOtype_DISCONNECT:
-      Serial.printf("[IOc] Disconnected!n");
+      Serial.printf("Socket Disconnected!");
       break;
 
     case sIOtype_CONNECT:
-      Serial.printf("[IOc] Connected to url: %sn", payload);
+      Serial.printf("Socket Connected to url: %sn", payload);
       // join default namespace (no auto join in Socket.IO V3)
       socketIO.send(sIOtype_CONNECT, "/");
       break;
