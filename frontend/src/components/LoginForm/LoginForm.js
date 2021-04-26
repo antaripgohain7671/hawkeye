@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 import './styles.css';
 
-export default function Loginform({Login, error}) {
+export default function LoginForm({Login, error}) {
     const [details,setDetails] = useState({email:"",password:""});
 
     const submitHandler = e =>{
-        e.preventDefault();
+        e.preventDefault();     // Stop from relaoding page when submitted
         Login(details);
     }
     return (

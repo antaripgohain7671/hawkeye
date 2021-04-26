@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import Loginform from './components/LoginForm/LoginForm';
+import LoginForm from './components/LoginForm/LoginForm';
+import LiveStream from './components/LiveStream/LiveStream';
 
 function App() {
   
@@ -15,9 +16,9 @@ function App() {
   // Function that checks login details and updates the state of the app
   // if login is successful
   const Login = details => {
-    console.log("Logged in");
+
     if(details.email===adminUser.email && details.password===adminUser.password){
-      console.log("Loggedin");
+      console.log("Logged in");
       setUser({
         email: details.email
       });
@@ -41,10 +42,11 @@ function App() {
     <div className="App">
       {(user.email!=="")?(
         <div className="Menu">
+          <LiveStream />
           <button onClick={Logout}>Logout</button>
         </div>
       ):( 
-        <Loginform Login={Login} error ={error}/>
+        <LoginForm Login={Login} error ={error}/>
       )}
     </div>
   );

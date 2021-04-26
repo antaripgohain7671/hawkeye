@@ -6,6 +6,11 @@ const io = require('socket.io')(http);
 const dotenv   = require('dotenv');
 const mongoose = require('mongoose');
 
+// Import the ML object classifier function
+const { classify } = require('./ml/classifier');
+
+// To create new entry in db after a new package is detected
+const { Event } = require('./models/eventModel');
 
 // Serve static assets / react build folder if we are in production, works when deployed to heroku
 // In local server, need to start the react app manually
@@ -37,13 +42,19 @@ io.on('connection', (socket) => {
     })
 
     // 
-    socket.on('motion-detection', (msg) => {
-        /* Add logic to push notification to user
-            - Convert from base64 to jpeg buffer
-            - Run object detection / classification on it
-            - Push notification to user if event is detected
-        */
-        console.log("Event detected");
+    socket.on('motion-detection', (msg) => {    
+
+        // Convert image from base64 string to jpeg buffer
+        let pictureBase64 = msg.picture;
+        let pictureBuffer = Buffer.from(pictureBase64, "base64");
+
+        // - Run object detection / classification on it
+        classify('mobilenet/model.json', pictureBuffer, async (result) => {
+            try {
+                console.log(result);
+            }
+            catch (error) { console.error(error) }
+        });
     });
 
     // Join webuser so that stream can be viewed on multiple devices if wished
