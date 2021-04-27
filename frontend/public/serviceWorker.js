@@ -5,7 +5,8 @@ const assets = [
     "./",
     "./index.html",
     "./images/logos/logo192.png",
-    "./images/logos/offline.html"
+    "./images/logos/logo-transparent.png",
+    "./offline.html"
 ];
 
 const self = this;
