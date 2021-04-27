@@ -3,31 +3,30 @@ import axios from 'axios';
 import Update from './Update/Update';
 import './styles.css';
 
-export default function Updates() {
+let allEvents = [];
 
-    let allEvents = []
+async function fetchEvents (){
 
-    const fetchEvents = async () => {
-        await axios.get('https://hawkeye-security.herokuapp.com/events')
+    await axios.get('https://hawkeye-security.herokuapp.com/events')
             .then((response) => {
                 allEvents = response.data;
-                console.log(allEvents);
+                console.log('fetched')
             })
             .catch((error) => {console.log(error)});
-    }
+}
+fetchEvents();
 
+export default function Updates() {
+    console.log(allEvents.length)
     return(
-        <div>
-            <button onClick={fetchEvents}> Fetch Update </button>
+        <>
+            <div id="updates">
             {
-                allEvents.map((fetch)=>(
-                    <Update update={{fetch}}/>
+                allEvents.map((event)=>(
+                    <Update event={event}/>
                 ))
-
-                // for(let i = 0; i < allEvents.length; i++) {
-                //     <Update
-                // }
             }
-        </div>
+            </div>
+        </>
     );
 }
