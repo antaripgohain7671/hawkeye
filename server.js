@@ -5,6 +5,10 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const dotenv   = require('dotenv');
 const mongoose = require('mongoose');
+const cors = require('cors');
+
+// Enable cross origin resource sharing
+app.use(cors());
 
 // Import the ML object classifier function
 const { classify } = require('./ml/classifier');
