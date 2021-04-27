@@ -62,7 +62,7 @@ void setup() {
   Serial.println(setup_camera() ? "CAMERA SETUP" : "ERROR SETTING UP CAMERA");
 
   // Make socket connection with server address, port and URL
-  socketIO.begin("192.168.0.105", 3000, "/socket.io/?EIO=4");
+  socketIO.begin("http://hawkeye-security.herokuapp.com/", 80, "/socket.io/?EIO=4");
 
   // SocketIO event handler
   socketIO.onEvent(socketIOEvent);

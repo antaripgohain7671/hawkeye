@@ -11,19 +11,22 @@ export default function Updates() {
         await axios.get('https://hawkeye-security.herokuapp.com/events')
             .then((response) => {
                 allEvents = response.data;
+                console.log(allEvents);
             })
             .catch((error) => {console.log(error)});
     }
 
     return(
         <div>
-            <button onClick={fetchEvents()}>
-                Fetch Update
-            </button>
+            <button onClick={fetchEvents}> Fetch Update </button>
             {
                 allEvents.map((fetch)=>(
-                    <Update update={fetch}/>
+                    <Update update={{fetch}}/>
                 ))
+
+                // for(let i = 0; i < allEvents.length; i++) {
+                //     <Update
+                // }
             }
         </div>
     );
