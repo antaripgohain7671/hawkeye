@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import LoginForm from './components/LoginForm/LoginForm';
 import LiveStream from './components/LiveStream/LiveStream';
 import Updates from './components/Updates/Updates';
+import './App.css'
 
 function App() {
   
