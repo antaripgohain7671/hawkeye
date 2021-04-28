@@ -10,7 +10,6 @@ async function fetchEvents (){
     await axios.get('https://hawkeye-security.herokuapp.com/events')
             .then((response) => {
                 allEvents = response.data;
-                console.log('fetched')
             })
             .catch((error) => {console.log(error)});
 }
@@ -22,7 +21,7 @@ export default function Updates() {
             <div id="updates">
             {
                 allEvents.map((event)=>(
-                    <Update event={event}/>
+                    <Update key={event._id} event={event}/>
                 ))
             }
             </div>
