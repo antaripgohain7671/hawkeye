@@ -17,7 +17,6 @@ async function fetchEvents (){
 fetchEvents();
 
 export default function Updates() {
-    console.log(allEvents.length)
     return(
         <>
             <div id="updates">

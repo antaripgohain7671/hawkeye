@@ -6,6 +6,16 @@ const io = require('socket.io')(http);
 const dotenv   = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const webpush = require("web-push");
+
+// Recieved from client
+let subscription;
+
+// For parsing application/json
+app.use(express.json());
+  
+// For parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
 
 // Enable cross origin resource sharing
 app.use(cors());
@@ -20,6 +30,18 @@ const { Event } = require('./models/eventModel');
 const eventRoutes = require('./routes/eventsRoutes.js');
 app.use('/events', eventRoutes);
 
+// Add "/subscribe" route, used by frontend to subscribe for push notification
+// const notificationRoutes = require('./routes/notificationRoutes.js');
+// app.use('/subscribe', notificationRoutes);
+/* make use of the route above instead of defining it here
+   this is a temp solution */
+app.post('/subscribe', (req, res) => {
+    subscription = req.body;
+    res.status(201).json({});
+})
+
+
+
 // Serve static assets / react build folder if we are in production, works when deployed to heroku
 // In local server, need to start the react app manually
 if(process.env.NODE_ENV === 'production') {
@@ -32,9 +54,18 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 
+
 // Load variables from the .env file
 dotenv.config();
 
+
+
+// Load vapid keys from .env and setup Vapid
+webpush.setVapidDetails(
+    "mailto:test@test.com",
+    process.env.PUBLIC_VAPID_KEY,
+    process.env.PRIVATE_VAPID_KEY
+);
 
 io.on('connection', (socket) => {
     console.log("Client or ESP-Cam Connected");
@@ -49,7 +80,7 @@ io.on('connection', (socket) => {
         io.sockets.emit('streaming-request', data.request);
     })
 
-    // 
+    // When motion detection event is reported
     socket.on('motion-detection', (msg) => {    
 
         // Convert image from base64 string to jpeg buffer
@@ -59,6 +90,7 @@ io.on('connection', (socket) => {
         // - Run object detection / classification on it
         classify('mobilenet/model.json', pictureBuffer, async (result) => {
             console.log(`Classified event image as: "${result.detectedObj}" with ${result.probability * 100}% probability`);
+            // Create new entry in mongoDB with the classification data/
             try {
                 let newEvent = new Event({
                     image: pictureBase64,
@@ -70,6 +102,20 @@ io.on('connection', (socket) => {
             }
             catch (error) { console.error(error) }
         });
+
+
+        // Send push notification to user
+        // Create payload
+        const payload = JSON.stringify({ title: "New Event Reported" });
+        if(subscription == undefined) {
+            console.log("Subscription endpoint not available, can't send push notification");
+        }
+        else {
+            // Pass object into sendNotification
+            webpush
+                .sendNotification(subscription, payload)
+                .catch(err => console.error(err));
+        }
     });
 
     // Join webuser so that stream can be viewed on multiple devices if wished
@@ -89,6 +135,8 @@ mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology:
     // If any err
     .catch((error) => {  console.error(error.message);  }
 );
+
+
 
 // Not sure why, but just to avoid warnings I guess
 mongoose.set('useFindAndModify', false);

@@ -49,3 +49,14 @@ self.addEventListener("activate", (event) => {
             
     )
 });
+
+
+// Listen for push notifications from the server and forward to user
+self.addEventListener("push", event => {
+  const data = event.data.json();
+  console.log("Push Recieved...");
+  self.registration.showNotification(data.title, {
+    body: "Notified",
+    icon: "http://image.ibb.co/frYOFd/tmlogo.png"
+  });
+});
