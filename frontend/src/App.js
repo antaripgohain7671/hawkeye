@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import LoginForm from './components/LoginForm/LoginForm';
 import LiveStream from './components/LiveStream/LiveStream';
 import Updates from './components/Updates/Updates';
+import Header from './components/Header/Header.js';
 import './App.css'
 
 function App() {
@@ -44,12 +45,16 @@ function App() {
     <div className="App">
       {(user.email!=="")?(
         <div className="Menu">
+          <Header isLoggedIn={true}/>
           <LiveStream />
           <Updates />
-          <button onClick={Logout}>Logout</button>
+          <button className="logoutbutton" onClick={Logout}>Logout</button>
         </div>
       ):( 
-        <LoginForm Login={Login} error ={error}/>
+        <>
+          <Header isLoggedIn={false}/>
+          <LoginForm Login={Login} error ={error}/>
+        </>
       )}
     </div>
   );

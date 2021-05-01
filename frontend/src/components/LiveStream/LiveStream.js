@@ -2,7 +2,7 @@ import React from 'react';
 import io from 'socket.io-client';
 import './styles.css';
 
-const socket = io("http://localhost:3000/");
+const socket = io("http://localhost:5000/");
 
 export default function LiveStream() {
     let isLiveStreaming = false;
@@ -21,7 +21,6 @@ export default function LiveStream() {
     // Send signal to node, which is then forwarded to espcam to
     // change mode of operation between livestreaming and motion detecting
     const eventHandler = () => {
-        // isLiveStreaming ? button.innerHTML = "Start Livestreaming"   : button.innerHTML = "Stop Livestreaming";
         socket.emit('streaming-request', {});
         isLiveStreaming = !isLiveStreaming;
     }
@@ -30,11 +29,11 @@ export default function LiveStream() {
     socket.emit("webuser", {});
 
     return (
-        <div>
+        <div id="jpgwrapper">
             <img
                 id="jpgstream"
                 className="jpgstream"
-                src=""
+                src="/images/playbutton.png"
                 alt="Livestream from ESP32-CAM"
                 onClick={eventHandler}
             />

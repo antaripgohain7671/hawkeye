@@ -12,7 +12,7 @@ export default function LoginForm({Login, error}) {
         <div className={styles.body}>
             <form onSubmit={submitHandler}>
                 <div className="form-inner">
-                    <p class={styles.sign} align="center">Login</p>
+                    <p className={styles.sign} align="center">Login</p>
                     {(error!=="")?(<div className={styles.error}>{error}</div>): ""}
                     <div className={styles.inner}>
                         <input className={styles.input} type="text" placeholder="Username" name="name" id="name" onChange={e=>setDetails({...details,email:e.target.value})} value={details.email}/>
