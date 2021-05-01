@@ -21,10 +21,10 @@ body {
 }
 
 div .navbar {
-    height: 50px;
+    height: 60px;
     width: 100%;
     margin: 0;
-    background-color: #25201d;
+    background-color: #29211c;
     color: #ffffff;
     display: flex;
     flex-direction: row;

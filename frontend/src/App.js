@@ -56,16 +56,16 @@ function App() {
           
           
           
-          <div id="navbar">
+          <div className="navbar">
                 <div className="left">
                     <img className="logo" src="/images/logos/logo-transparent.png"></img>
                     <h1 className="home"> Hawk Eye </h1>
                 </div>
 
                 <div className="right">
-                    <button onClick={loadAbout} className="rightElement" href="/"> About </button>
                     <button onClick={loadLivestream} className="rightElement" href="/"> Livestream </button>
                     <button onClick={loadUpdates} className="rightElement" href="/"> Updates </button>
+                    <button onClick={loadAbout} className="rightElement" href="/"> About </button>
                 </div>
           </div>
 
@@ -81,7 +81,7 @@ function App() {
       /* If NOT logged in */
       ):( 
         <>
-          <div id="navbar">
+          <div className="navbar">
                 
                 <div className="left">
                     <img className="logo" src="/images/logos/logo-transparent.png"></img>
