@@ -43,7 +43,7 @@ input:focus{
     border: 2px solid rgba(0, 0, 0, 0.18) !important;
 }
 
-button{
+.loginbutton{
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
@@ -55,7 +55,7 @@ button{
     padding-top: 10px;
     font-family: 'Ubuntu', sans-serif;
     margin-left: 35%;
-    font-size: 13px;
+    font-size: 1rem;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
 .error{

@@ -7,4 +7,69 @@ body {
     position: relative;
     left: 50%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #9C27B0, #E040FB);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1em;
+}
+
+div .navbar {
+    height: 50px;
+    width: 100%;
+    margin: 0;
+    background-color: #25201d;
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.right {
+    height: 100%;
+}
+
+.left {
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    margin: 15px;
+}
+
+.home {
+    
+}
+
+.rightElement {
+    font-size: 1rem;
+    margin: 0 15px;
+    color: #ffffff;
+    border: none;
+    background-color: transparent;
+    height: 100%;
+    min-width: 75px;
+    max-width: 100px;
+}
+
+.rightElement:hover {
+    font-size: 1rem;
+    margin: 0 15px;
+    color: #000000;
+    border: none;
+    background-color: white;
+    height: 100%;
+    min-width: 75px;
+    max-width: 100px;
 }

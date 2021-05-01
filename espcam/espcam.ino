@@ -62,7 +62,8 @@ void setup() {
   Serial.println(setup_camera() ? "CAMERA SETUP" : "ERROR SETTING UP CAMERA");
 
   // Make socket connection with server address, port and URL
-  socketIO.begin("192.168.0.105", 3000, "/socket.io/?EIO=4");
+//  socketIO.begin("192.168.0.105", 5000, "/socket.io/?EIO=4");
+  socketIO.begin("192.168.0.105", 5000, "/socket.io/");
 
   // SocketIO event handler
   socketIO.onEvent(socketIOEvent);
@@ -91,7 +92,7 @@ void loop() {
       report_event();
       Serial.println("Motion Detected");
     }
-    
+
 
     update_frame();
     Serial.println("=================");
@@ -224,10 +225,10 @@ bool motion_detect() {
     }
   }
 
-      Serial.print("Changed ");
-      Serial.print(changes);
-      Serial.print(" out of ");
-      Serial.println(blocks);
+  Serial.print("Changed ");
+  Serial.print(changes);
+  Serial.print(" out of ");
+  Serial.println(blocks);
 
   return (1.0 * changes / blocks) > IMAGE_DIFF_THRESHOLD;
 }
@@ -357,6 +358,7 @@ void live_stream() {
 
 
 void report_event() {
+
   camera_fb_t * fb = NULL;
 
   // Take Picture with Camera

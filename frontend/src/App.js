@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import LoginForm from './components/LoginForm/LoginForm';
 import LiveStream from './components/LiveStream/LiveStream';
 import Updates from './components/Updates/Updates';
-import Header from './components/Header/Header.js';
+import About from './components/About/About'
 import './App.css'
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
 
   const [user,setUser] = useState({email:""});
   const [error,setError] = useState();
+  const [currentPage, setCurrentPage] = useState("livestream"); // This is relevant only after logging in
 
   // Function that checks login details and updates the state of the app
   // if login is successful
@@ -39,20 +40,56 @@ function App() {
     setError("")
   }
 
+  function loadAbout()      { setCurrentPage("about")      }
+  function loadLivestream() { setCurrentPage("livestream") }
+  function loadUpdates()    { setCurrentPage("updates")    }
+
 
   
+
+
   return (
     <div className="App">
+      {/* If logged in */ }
       {(user.email!=="")?(
         <div className="Menu">
-          <Header isLoggedIn={true}/>
-          <LiveStream />
-          <Updates />
+          
+          
+          
+          <div id="navbar">
+                <div className="left">
+                    <img className="logo" src="/images/logos/logo-transparent.png"></img>
+                    <h1 className="home"> Hawk Eye </h1>
+                </div>
+
+                <div className="right">
+                    <button onClick={loadAbout} className="rightElement" href="/"> About </button>
+                    <button onClick={loadLivestream} className="rightElement" href="/"> Livestream </button>
+                    <button onClick={loadUpdates} className="rightElement" href="/"> Updates </button>
+                </div>
+          </div>
+
+
+          { currentPage == "about"      && <About />      }
+          { currentPage == "livestream" && <LiveStream /> }
+          { currentPage == "updates"    && <Updates />    }
+
+
           <button className="logoutbutton" onClick={Logout}>Logout</button>
         </div>
+      
+      /* If NOT logged in */
       ):( 
         <>
-          <Header isLoggedIn={false}/>
+          <div id="navbar">
+                
+                <div className="left">
+                    <img className="logo" src="/images/logos/logo-transparent.png"></img>
+                    <h1 className="home"> Hawk Eye </h1>
+                </div>
+          </div>
+
+          
           <LoginForm Login={Login} error ={error}/>
         </>
       )}

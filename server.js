@@ -122,6 +122,10 @@ io.on('connection', (socket) => {
     socket.on('webuser', (msg) => {
         socket.join('webusers');
     });
+
+    socket.on('disconnect', function() {
+        console.log('Got disconnected!');
+    });
 });
 
 

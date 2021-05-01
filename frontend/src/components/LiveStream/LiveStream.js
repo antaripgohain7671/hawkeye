@@ -30,6 +30,7 @@ export default function LiveStream() {
 
     return (
         <div id="jpgwrapper">
+            <center><h1>LIVE FEED FROM ESPCAM</h1></center>
             <img
                 id="jpgstream"
                 className="jpgstream"
