@@ -2,7 +2,12 @@ const express = require('express');         // Used for routing
 const path = require('path');
 const app = express();
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, {
+    cors: {
+        origin: true,
+        credentials: false
+    }
+});
 const dotenv   = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');

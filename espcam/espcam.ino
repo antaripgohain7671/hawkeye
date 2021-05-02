@@ -1,4 +1,4 @@
-#define CAMERA_MODEL_AI_THINKER       // Camera pin config defined in camera_pins.h
+  #define CAMERA_MODEL_AI_THINKER       // Camera pin config defined in camera_pins.h
 
 #include "WiFi.h"
 #include "esp_camera.h"
@@ -62,7 +62,8 @@ void setup() {
   Serial.println(setup_camera() ? "CAMERA SETUP" : "ERROR SETTING UP CAMERA");
 
   // Make socket connection with server address, port and URL
-  socketIO.begin("192.168.43.184", 5000, "/socket.io/?EIO=4");
+//  socketIO.begin("192.168.43.184", 5000, "/socket.io/?EIO=4");
+  socketIO.begin("https://hawkeye-security.herokuapp.com/", 443, "/socket.io/?EIO=4");
 
   // SocketIO event handler
   socketIO.onEvent(socketIOEvent);

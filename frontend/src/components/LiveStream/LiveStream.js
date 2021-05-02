@@ -2,7 +2,7 @@ import React from 'react';
 import io from 'socket.io-client';
 import './styles.css';
 
-const socket = io("http://localhost:5000/");
+const socket = io("");
 
 export default function LiveStream() {
     let isLiveStreaming = false;
