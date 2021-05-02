@@ -57,6 +57,6 @@ self.addEventListener("push", event => {
   console.log("Push Recieved...");
   self.registration.showNotification(data.title, {
     body: "Notified",
-    icon: "http://image.ibb.co/frYOFd/tmlogo.png"
+    icon: "https://hawkeye-security.herokuapp.com/images/logos/logo-transparent.png"
   });
 });
