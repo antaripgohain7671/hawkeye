@@ -36,8 +36,8 @@ void report_event();
 
 // Replace with your network credentials
 const char* hostname        = "ESP32CAM";
-const char* ssid            = "Arcadia Planitia";
-const char* password        = "nukemars69420";
+const char* ssid            = "wifi";
+const char* password        = "123456789";
 SocketIOclient socketIO;
 
 
@@ -62,8 +62,7 @@ void setup() {
   Serial.println(setup_camera() ? "CAMERA SETUP" : "ERROR SETTING UP CAMERA");
 
   // Make socket connection with server address, port and URL
-//  socketIO.begin("192.168.0.105", 5000, "/socket.io/?EIO=4");
-  socketIO.begin("192.168.0.105", 5000, "/socket.io/");
+  socketIO.begin("192.168.43.184", 5000, "/socket.io/?EIO=4");
 
   // SocketIO event handler
   socketIO.onEvent(socketIOEvent);

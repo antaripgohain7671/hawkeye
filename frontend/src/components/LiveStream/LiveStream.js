@@ -9,7 +9,8 @@ export default function LiveStream() {
 
     // When images are recieved as base64 strings, set source to that string
     socket.on('jpgstream_client', function (msg) {
-        document.querySelector('#jpgstream').src = "data:image/jpg;base64," + msg.picture;
+        if(isLiveStreaming)
+            document.querySelector('#jpgstream').src = "data:image/jpg;base64," + msg.picture;
     });
 
     if(isLiveStreaming) {
@@ -23,6 +24,10 @@ export default function LiveStream() {
     const eventHandler = () => {
         socket.emit('streaming-request', {});
         isLiveStreaming = !isLiveStreaming;
+
+        if(!isLiveStreaming) {
+            document.querySelector('#jpgstream').src = "/images/playbutton.png";
+        }
     }
 
     // Establish yourself as a webuser
